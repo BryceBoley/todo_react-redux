@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector, useDispatch } from "react-redux";
+import { addUser } from "./redux/actions/addUser";
+import { useState } from "react";
+
+
 
 function App() {
+  const users = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+
+  const renderedUserList = users.length > 0 ? users.map((user) =>
+    <li key={user.id} name={user.name} >{user.name}
+    <button>x</button></li>
+  ) : <></>
+  const [inputUserName, setInputUsername] = useState("")
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ul>{renderedUserList}</ul>
+
+      <input type="text" id="id" name="name" value={inputUserName}
+        onChange={(e) => setInputUsername(e.target.value)}></input>
+      <button onClick={() => dispatch(addUser({ name: inputUserName, id: users.length }))}>add user</button>
+      <hr></hr>
+
     </div>
   );
 }

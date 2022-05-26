@@ -1,25 +1,25 @@
 import { useSelector, useDispatch } from "react-redux";
-import { addUser } from "./redux/actions/addUser";
+import { addTodo } from "./redux/actions/addTodo";
 import { useState } from "react";
 
 
 
 function App() {
-  const users = useSelector((state) => state.userReducer);
+  const todos = useSelector((state) => state.todoReducer);
   const dispatch = useDispatch();
 
-  const renderedUserList = users.length > 0 ? users.map((user) =>
-    <li key={user.id} name={user.name} >{user.name}
+  const renderedTodoList = todos.length > 0 ? todos.map((todo) =>
+    <li key={todo.id} todo={todo.todo} >{todo.todo}
     <button>x</button></li>
   ) : <></>
-  const [inputUserName, setInputUsername] = useState("")
+  const [inputTodo, setInputTodo] = useState("")
   return (
     <div className="App">
-      <ul>{renderedUserList}</ul>
+      <ul>{renderedTodoList}</ul>
 
-      <input type="text" id="id" name="name" value={inputUserName}
-        onChange={(e) => setInputUsername(e.target.value)}></input>
-      <button onClick={() => dispatch(addUser({ name: inputUserName, id: users.length }))}>add user</button>
+      <input type="text" id="id" name="todo" value={inputTodo}
+        onChange={(e) => setInputTodo(e.target.value)}></input>
+      <button onClick={() => dispatch(addTodo({ todo: inputTodo, id: todos.length }))}>add todo</button>
       <hr></hr>
 
     </div>

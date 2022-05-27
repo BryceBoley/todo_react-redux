@@ -1,4 +1,4 @@
-ul {
+/* ul {
     background: lightgrey;
     padding: 20px;
 }
@@ -7,4 +7,9 @@ ul li {
     background: white;
     color: rgb(50, 50, 50);
     margin: 5px;
-}  
+} 
+
+button {
+    cursor: pointer; 
+    color: grey;
+} */

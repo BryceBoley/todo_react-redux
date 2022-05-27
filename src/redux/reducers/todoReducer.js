@@ -4,17 +4,14 @@ const inititalState = [
     { todo: "Change a property",  id:2},
     { todo: "Take a break",  id:3}
 ];
-const todoReducer = (state = inititalState, action) => {
+const userReducer = (state = inititalState, action) => {
   switch (action.type) {
     case "ADDTODO": {
-      return [...state, {todo: action.payload.todo, id: action.payload.id }];
-    }
-    case "REMOVETODO": {
-      return 
+      return [...state, {name: action.payload.todo, id: action.payload.id }];
     }
     default:
         return state;
   }
 
 };
-export default todoReducer;
+export default userReducer;

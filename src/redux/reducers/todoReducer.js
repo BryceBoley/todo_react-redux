@@ -7,7 +7,7 @@ const inititalState = [
 const userReducer = (state = inititalState, action) => {
   switch (action.type) {
     case "ADDTODO": {
-      return [...state, {name: action.payload.todo, id: action.payload.id }];
+      return [...state, {todo: action.payload.todo, id: action.payload.id }];
     }
     default:
         return state;

@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addTodo } from "./redux/actions/addTodo";
-import { removeTodo } from "./redux/actions/removeTodo";
 import { useState } from "react";
 import "./App.css"
 
@@ -9,11 +8,6 @@ function App() {
   const dispatch = useDispatch();
   const [inputTodo, setInputTodo] = useState("")
   
-  
-
-
-  
-  const [checked, setChecked] = useState(todos.checked)
   const handleChange = e => {
     setInputTodo(e.target.value) 
     
@@ -27,31 +21,29 @@ function App() {
 
   const handleOnClick = e => {
     saveTheTodo()
-    document.getElementById("addTodo").focus();
   }
 
   function saveTheTodo () {
     if (inputTodo !== "") {
-      dispatch(addTodo({ todo: inputTodo, id: todos.length, checked: false }))
+      console.log(todos.length);
+      console.log(inputTodo);
+      console.log(addTodo({ todo:inputTodo, id:todos.length}));
+      dispatch(addTodo({ todo: inputTodo, id: todos.length}))
       setInputTodo("")
     } 
   }
   const RenderedTodoList = todos.length > 0 ? todos.map((todo) =>
-    <RenderedTodoList key={todo.id} todo={todo.todo} >
-      {todo.todo} <button ></button></RenderedTodoList>
-      
-      )
-   : <></>
+    <li key={todo.id} todo={todo.todo} >
+      {todo.todo} <button ></button></li>
+    ): <></>
 
   return (
     <div className="App">
       <ul>
         {RenderedTodoList}
-        </ul>
+      </ul>
       <input 
-        type="text" 
-        id="addTodo" 
-        name="todo"  
+        type="text"   
         autoFocus={true} 
         value={inputTodo}
         onChange={handleChange} 

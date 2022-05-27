@@ -1,6 +1,6 @@
-export const addTodo = (todo, id, checked) => {
+export const addTodo = (payload) => {
   return {
     type: "ADDTODO",
-    payload: todo, id, checked
+    payload: payload
   };
 };

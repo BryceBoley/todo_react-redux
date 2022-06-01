@@ -1,6 +1,6 @@
-export const deleteTodo = (id) => {
-    return {
-      type: "DELETETODO",
-      id: id
-    };
+export const deleteTodo = id => {
+  return {
+    type: "DELETETODO",
+    id: id
   };
+};

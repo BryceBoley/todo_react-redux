@@ -1,30 +1,31 @@
 
+
 const initialState = [
 
-    { todo: "Create a todo",  id:0 },
-    { todo: "Add new functionality",  id:1},
-    { todo: "Change a property",  id:2},
-    { todo: "Take a break",  id:3}
+    { todo: "Create a todo",  id:0, completed: true },
+    { todo: "Add new functionality",  id:1, completed: true},
+    { todo: "Change a property",  id:2, completed: false},
+    { todo: "Take a break",  id:3, completed: false}
 ];
-const userReducer = (state = initialState, action) => {
+
+const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADDTODO": {
-      return [...state, {todo: action.payload.todo, id: action.payload.id }];
+      return [...state, {todo: action.payload.todo, id: action.payload.id, completed: false }];
     }
     case "DELETETODO": {
-      // var a = [...state.slice(0, action.id)];
-      // var b = state.slice(action.id);
-      // var newArray = [a.concat(b)];
-      // console.log(a);
-      // console.log(b);
-      // console.log(newArray);
-      // return [newArray];
-      return [...state.slice(0, action.id), ...state.slice(action.id + 1)]
-
-    }              
+      var todos = [...state];
+      const result = todos.filter(checkId);
+      function checkId(todo){
+        return todo.id != action.id 
+      }      
+      return result;     
+    }
+       
+    case "TOGGLETODO": {
+      return state;
+    }
     default:
         return state;
-  }
-
-};
-export default userReducer;
+    }}
+export default todoReducer;

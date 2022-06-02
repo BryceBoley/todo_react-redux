@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addTodo } from "./redux/actions/addTodo";
 import { deleteTodo } from "./redux/actions/deleteTodo";
+import { toggleTodo } from "./redux/actions/toggleTodo";
 import { useState } from "react";
 import "./App.css"
 
@@ -8,10 +9,12 @@ function App() {
   const todos = useSelector((state) => state.todoReducer);
   const dispatch = useDispatch();
   const [inputTodo, setInputTodo] = useState("")
-  
+
+  const [toggle, setToggle] = useState(todos.completed)
+
   const handleChange = e => {
-    setInputTodo(e.target.value) 
-    
+    setInputTodo(e.target.value)
+
   }
 
   const handleKeyDown = e => {
@@ -24,44 +27,59 @@ function App() {
     saveTheTodo()
   }
 
-  function saveTheTodo () {
+  function saveTheTodo() {
     if (inputTodo !== "") {
-      dispatch(addTodo({ todo: inputTodo, id: todos.length}))
+      dispatch(addTodo({ todo: inputTodo, id: todos.length }))
       setInputTodo("")
-    } 
+    }
   }
- 
+
   const handleOnClickDelete = e => {
     const id = e.target.parentElement.id;
-    dispatch(deleteTodo(id))}
-  
-  const RenderedTodoList = todos.length > 0 ? todos.map((todo) =>
-    
-      <li 
-        key={todo.id} 
-        todo={todo.todo} 
-        id={todo.id}>
-          {todo.todo} 
-          <button 
-            onClick= {handleOnClickDelete} >
-          </button>
-      </li>
+    dispatch(deleteTodo(id))
+  }
 
-    ): <></>
+  const handleOnClickToggle = e => {
+    const id = e.target.attributes.id.value;
+    console.log(e.target.attributes.id.value);
+    dispatch(toggleTodo(id))
+  }
+
+  const RenderedTodoList = todos.length > 0 ? todos.map((todo) =>
+
+    <li
+      key={todo.id}
+      todo={todo.todo}
+      id={todo.id}
+      onClick={handleOnClickToggle}
+      style={{
+        textDecoration:
+          todo.completed ?
+            'line-through' :
+            'none'
+      }}>
+
+      {todo.todo}
+      <button
+        onClick={handleOnClickDelete} >
+      </button>
+    </li>
+
+  ) : <></>
 
   return (
     <div className="App">
       <ul className="todoList">
         {todos && RenderedTodoList}
       </ul>
-      <br/>
+      <br />
       <hr></hr>
-      <br/>
-      <input 
-        type="text"   
-        autoFocus={true} 
+      <br />
+      <input
+        type="text"
+        autoFocus={true}
         value={inputTodo}
-        onChange={handleChange} 
+        onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
       <button onClick={handleOnClick}>add todo</button>

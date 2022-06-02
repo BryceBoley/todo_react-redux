@@ -1,4 +1,11 @@
-/* ul {
+.App {
+    margin: auto;
+  width: 15%;
+  border: 3px solid green;
+  padding: 10px;
+}
+
+ul {
     background: lightgrey;
     padding: 20px;
 }
@@ -12,4 +19,8 @@ ul li {
 button {
     cursor: pointer; 
     color: grey;
-} */
+}
+
+.remove {
+    float: right;
+}

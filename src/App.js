@@ -61,7 +61,8 @@ function App() {
 
       {todo.todo}
       <button
-        onClick={handleOnClickDelete} >
+        className="remove" 
+        onClick={handleOnClickDelete} >remove
       </button>
     </li>
 
@@ -69,6 +70,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Todos</h1>
       <ul className="todoList">
         {todos && RenderedTodoList}
       </ul>
@@ -83,6 +85,8 @@ function App() {
         onKeyDown={handleKeyDown}
       />
       <button onClick={handleOnClick}>add todo</button>
+      <br />
+      <br />
       <hr></hr>
     </div>
   );

@@ -10,8 +10,6 @@ function App() {
   const dispatch = useDispatch();
   const [inputTodo, setInputTodo] = useState("")
 
-  const [toggle, setToggle] = useState(todos.completed)
-
   const handleChange = e => {
     setInputTodo(e.target.value)
 
@@ -29,7 +27,7 @@ function App() {
 
   function saveTheTodo() {
     if (inputTodo !== "") {
-      dispatch(addTodo({ todo: inputTodo, id: todos.length }))
+      dispatch(addTodo({ todo: inputTodo, id: new Date().valueOf() }))
       setInputTodo("")
     }
   }
@@ -40,8 +38,8 @@ function App() {
   }
 
   const handleOnClickToggle = e => {
+   // console.log(e.target.attributes.id.value);
     const id = e.target.attributes.id.value;
-    console.log(e.target.attributes.id.value);
     dispatch(toggleTodo(id))
   }
 

@@ -17,8 +17,11 @@ const todoReducer = (state = initialState, action) => {
       var todos = [...state];
       const result = todos.filter(checkId);
       function checkId(todo) {
+        console.log(todo.id);
+        console.log(action.id);
         return todo.id != action.id
       }
+      console.log(result);
       return result;
     }
     case 'TOGGLETODO':
@@ -26,16 +29,11 @@ const todoReducer = (state = initialState, action) => {
         t => todo(t, action)
       );
       function todo(t, action) {
-        console.log(t.id);
-        console.log(action);
-        console.log(t.completed)
         if (t.id.toString() !== action.id) {
-          console.log(t);
           return t;
         }
         return { ...t, completed: !t.completed };
       }
-      console.log(myTodos);
       return myTodos;
     default:
       return state;
